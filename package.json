@@ -1,0 +1,21 @@
+{
+  "name": "pdfgen",
+  "version": "1.0.0",
+  "description": "generate pdf using pdfmake",
+  "main": "server-optimazed.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch src/server-optimazed.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "girfansyah",
+  "license": "ISC",
+  "dependencies": {
+    "compression": "^1.8.1",
+    "express": "^5.1.0",
+    "helmet": "^8.1.0",
+    "ioredis": "^5.7.0",
+    "pdfmake": "^0.2.20",
+    "piscina": "^5.1.3"
+  }
+}
