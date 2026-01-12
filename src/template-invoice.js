@@ -1,24 +1,27 @@
-import dummy from '../src/data/opd-data.json' assert { type: 'json' };
-import { buildTableInvoice } from './builders/build-table.js';
-import { buildNotes } from './builders/builder-notes.js';
-import { buildTax } from './builders/builder-tax.js';
-import { pdfStyles } from './utils/pdf-style.util.js';
+import dummy from "../src/data/opd-data.json" with { type: "json" };
+import { buildTableInvoice } from "./builders/build-table.js";
+import { buildNotes } from "./builders/builder-notes.js";
+import { buildTax } from "./builders/builder-tax.js";
+import { pdfStyles } from "./utils/pdf-style.util.js";
 
-export const buildInvoice = () => {
+export const buildInvoice = (data = null) => {
+  // Use provided data or fallback to dummy data
+  const invoiceData = data || dummy.data;
+
   return {
-    pageSize: 'A4',
+    pageSize: "A4",
     pageMargins: [30, 200, 30, 140],
 
-    background: { type: 'border' },
-    header: { type: 'header', data: dummy.data },
+    background: { type: "border" },
+    header: { type: "header", data: invoiceData },
     content: [
-      buildTableInvoice(dummy.data),
-      buildTax(dummy.data.invoice_details),
-      buildNotes(dummy.data),
+      buildTableInvoice(invoiceData),
+      buildTax(invoiceData.invoice_details),
+      buildNotes(invoiceData),
     ],
-    footer: { type: 'footer' },
+    footer: { type: "footer" },
 
     styles: pdfStyles,
-    defaultStyle: { font: 'Helvetica' },
+    defaultStyle: { font: "Helvetica" },
   };
 };

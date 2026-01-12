@@ -2,16 +2,24 @@
   "name": "pdfgen",
   "version": "1.0.0",
   "description": "generate pdf using pdfmake",
-  "main": "server-optimazed.js",
+  "main": "src/server-ultra.js",
   "type": "module",
   "scripts": {
-    "dev": "node --watch src/server-optimazed.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "node --watch src/server-ultra.js",
+    "start": "node src/server-ultra.js",
+    "start:prod": "NODE_ENV=production node --expose-gc src/server-ultra.js",
+    "start:gc": "AUTO_GC=true node --expose-gc src/server-ultra.js",
+    "start:debug": "DEBUG_STATS=true node src/server-ultra.js",
+    "test": "npm run test:hang && npm run test:thread",
+    "test:hang": "node test/hang-detection-test.js",
+    "test:thread": "node test/thread-safety-test.js",
+    "test:all": "npm run test:hang && npm run test:thread"
   },
   "author": "girfansyah",
   "license": "ISC",
   "dependencies": {
     "compression": "^1.8.1",
+    "dotenv": "^17.2.3",
     "express": "^5.1.0",
     "helmet": "^8.1.0",
     "ioredis": "^5.7.0",
